@@ -16,9 +16,11 @@
             //Funcion Con objeto JSON
             data(){
                return {
-                text:"Hola Missael"
-               }
-            }
+                text:"<p>Hola Missael</p>"
+               };
+            },
+            //Directivas que recibe Argumentos
+            template:`<div v-html="text"></div>`
             //LLamanda de ID APP
         }).mount("#app");
         console.log(vm);
