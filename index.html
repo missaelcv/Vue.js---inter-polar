@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Introd. Fund. Vue.js</title>
 </head>
 <body>
     <script src="https://unpkg.com/vue@next"></script>
@@ -13,13 +13,19 @@
         const vm = Vue.createApp({
             data() {
                 return {
-                    attr: "alt",
-                    img: "https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ"
-                };
+                    counter: 0
+                 };
             },
-            template: `<img v-bind:[attr]="img" />`
+            methods: {
+                increment(){
+              
+                    this.counter++;
+                }
+            },
+
+            template: `<button v-on:click="increment">{{ counter}}</button>`
         }).mount("#app");
-        console.log(vm);
+      
     </script>
 </body>
 </html>
