@@ -13,11 +13,22 @@
         const vm = Vue.createApp({
             data() {
                 return {
-                    text: "Hola Vue"
+                firstName : "Missael",
+                lastName: "Maileny",
+                now: new Date()
                 };
             },
-            template: `
-                <p>{{ text }}</p> <input type="text" v-model="text"/>`
+            computed:{
+                    fullName(){
+                        return this.firstName + " " + this.lastName;
+                    },
+                    today(){
+                        return this.now.toLocalDateString();
+                    }
+            },
+            template: 
+            `<div>{{fullName}}</div>
+             <div>{{today}}</div>`
         }).mount("#app");
     </script>
 </body>
