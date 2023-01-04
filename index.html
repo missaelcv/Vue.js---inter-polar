@@ -17,14 +17,16 @@
                 return {
                     text: "Puerta cerrada",
                     open: false,
+                    username: ""
                 };
             },
             watch: {
                 open(value) {
                     if (value) {
-                        this.text = "Puerta Abierta";      
+                        this.text = "Acceder A tu Cuenta";      
                     } else {
-                        this.text = "Puerta Cerrada";
+                        this.text = "Cerrar Sesion";
+                        this.username= "";
                     }
                 }
             },
@@ -37,9 +39,22 @@
                 }
             },
             template: `
-            <div class="container" :class=" {'open': open, 'closed': !open}">
+            <div class="container" :class="styles">
                 <h2>{{ text }}</h2>
-                <button @click="open = !open">{{ label }}</button>
+                
+                <div v-if="open"> 
+                    <p>Hola, {{username}}</p>
+                </div>
+
+                <div v-else>
+                    <label>UserName</label>
+                    <input type="text" v-model="username">
+                </div>
+
+                <button @click="open = !open">
+                    <div v-if="!open">Acceder</div>
+                    <div v-else>Salir</div>
+                    </button>
             </div>`
         }).mount("#app");
     </script>
