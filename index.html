@@ -13,19 +13,17 @@
         const vm = Vue.createApp({
             data() {
                 return {
+                    evt: "submit",
                     counter: 0
-                 };
+                };
             },
             methods: {
-                increment(){
-              
+                submit() {
                     this.counter++;
                 }
-            },
-
-            template: `<button v-on:click="increment">{{ counter}}</button>`
+             },
+            template: `<form v-on:[evt]="submit"><button>{{ counter }}</button></form>`
         }).mount("#app");
-      
     </script>
 </body>
 </html>
