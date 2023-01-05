@@ -17,7 +17,17 @@
                 return {
                     text: "Puerta cerrada",
                     open: false,
-                    username: ""
+                    username: "",
+                    posts: [{
+                        title: "Titulo 1",
+                        description: "Loren Ipsum..."
+                    }, {
+                    title: "Titulo 2",
+                        description: "Loren Ipsum..."
+                    }, {
+                    title: "Titulo 3",
+                        description: "Loren Ipsum..." 
+                }]
                 };
             },
             watch: {
@@ -44,10 +54,17 @@
                 
                 <div v-if="open"> 
                     <p>Hola, {{username}}</p>
+
+                    <div class="list">
+                        <div v-for="item in posts" :key="i" class="item">
+                                <div class="title">{{item.title}}</div>
+                                    <p>{{item.description}}</p>
+                                  </div>
+                        </div>
                 </div>
 
                 <div v-else>
-                    <label>UserName</label>
+                    <div>UserName</div>
                     <input type="text" v-model="username">
                 </div>
 
@@ -85,6 +102,20 @@
       }
       .open {
           background-color: #b5e7a0;
+      }
+
+      .list{
+        display: flex;
+        flex-direction: column;
+      }
+
+      .item {
+        border: 1px solid black;
+      }
+
+      .title {
+        font-weight: bold;
+        font-size:1;
       }
 </style>
 
