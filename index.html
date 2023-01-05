@@ -12,7 +12,7 @@
 
     <div id="app"></div>
     <script>
-        const vm = Vue.createApp({
+        const app = Vue.createApp({
             data() {
                 return {
                     text: "Puerta cerrada",
@@ -51,29 +51,39 @@
             template: `
             <div class="container" :class="styles">
                 <h2>{{ text }}</h2>
-                
-                <div v-if="open"> 
-                    <p>Hola, {{username}}</p>
-
+                <div v-if="open">
+                    <p>Hola, {{ username }}</p>
                     <div class="list">
-                        <div v-for="item in posts" :key="i" class="item">
-                                <div class="title">{{item.title}}</div>
-                                    <p>{{item.description}}</p>
-                                  </div>
-                        </div>
+                        <item
+                            v-for="(item, i) in posts"
+                            :key="i"
+                            :post="item"
+                        />
+                    </div>
                 </div>
-
                 <div v-else>
-                    <div>UserName</div>
-                    <input type="text" v-model="username">
+                    <div>Username</div>
+                    <input type="text" v-model="username" />    
                 </div>
-
                 <button @click="open = !open">
                     <div v-if="!open">Acceder</div>
                     <div v-else>Salir</div>
-                    </button>
-            </div>`
-        }).mount("#app");
+                </button>
+            </div>
+            `
+        })
+
+        app.component("item", {
+            props: ["post"],
+            template: `
+            <div class="item">
+                <div class="title">{{ post.title }}</div>
+                <p>{{ post.description }}</p>
+            </div>
+            `
+        });
+
+        const vm= app.mount("#app");
     </script>
 
 <style>
