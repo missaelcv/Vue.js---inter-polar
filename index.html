@@ -8,126 +8,38 @@
 </head>
 <body>
     <script src="https://unpkg.com/vue@next"></script>
-   
-
     <div id="app"></div>
     <script>
         const app = Vue.createApp({
-            data() {
-                return {
-                    text: "Puerta cerrada",
-                    open: false,
-                    username: "",
-                    posts: [{
-                        title: "Titulo 1",
-                        description: "Loren Ipsum..."
-                    }, {
-                    title: "Titulo 2",
-                        description: "Loren Ipsum..."
-                    }, {
-                    title: "Titulo 3",
-                        description: "Loren Ipsum..." 
-                }]
-                };
-            },
-            watch: {
-                open(value) {
-                    if (value) {
-                        this.text = "Acceder A tu Cuenta";      
-                    } else {
-                        this.text = "Cerrar Sesion";
-                        this.username= "";
-                    }
-                }
-            },
-            computed: {
-                label() {
-                    return this.open ? "Cerrar" : "Abrir";
-                },
-                styles() {
-                    return this.open ? ['open'] : ['closed'];
-                }
-            },
+           
             template: `
-            <div class="container" :class="styles">
-                <h2>{{ text }}</h2>
-                <div v-if="open">
-                    <p>Hola, {{ username }}</p>
-                    <div class="list">
-                        <item
-                            v-for="(item, i) in posts"
-                            :key="i"
-                            :post="item"
-                        />
-                    </div>
+                <div> 
+                    <v-layout>
+                        <template v-slot:header>
+                            <button>Titulo</button>
+                        </template>
+                        <template v-slot:content>
+                            Lorem ispum dolor sit amet.
+                        </template>
+                    </v-layout>
                 </div>
-                <div v-else>
-                    <div>Username</div>
-                    <input type="text" v-model="username" />    
-                </div>
-                <button @click="open = !open">
-                    <div v-if="!open">Acceder</div>
-                    <div v-else>Salir</div>
-                </button>
-            </div>
-            `
-        })
-
-        app.component("item", {
-            props: ["post"],
-            template: `
-            <div class="item">
-                <div class="title">{{ post.title }}</div>
-                <p>{{ post.description }}</p>
-            </div>
             `
         });
 
+        app.component("v-layout", {
+            template: `
+            <header>
+                <slot name="header"></slot>    
+            </header>
+            <div>
+                <slot name="content"></slot>    
+            </div>
+            `
+        });
+        
         const vm= app.mount("#app");
     </script>
 
-<style>
-    html, body {
-          height: 100vh;
-          margin: 0;
-          font-family: Arial, Helvetica, sans-serif;
-      }
-      #app, .container {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-          width: 100%;
-          height: 100%;
-      }
-      button {
-          margin-top: 24px;
-          border: none;
-          background-color: rgb(8, 255, 94);
-          padding: 8px 24px;
-          border-radius: 12px;
-      }
-      .closed {
-          background-color: #eca1a6;
-      }
-      .open {
-          background-color: #b5e7a0;
-      }
-
-      .list{
-        display: flex;
-        flex-direction: column;
-      }
-
-      .item {
-        border: 1px solid black;
-      }
-
-      .title {
-        font-weight: bold;
-        font-size:1;
-      }
-</style>
 
 
 </body>
