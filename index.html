@@ -10,33 +10,23 @@
     <script src="https://unpkg.com/vue@next"></script>
     <div id="app"></div>
     <script>
-       const app = Vue.createApp({
+        const app = Vue.createApp({
             data() {
                 return {
                     text: "Hola Vue"
                 };
             },
-            provide() {
-                return {
-                    otroTexto: this.text
-                };
-            },
-            template: `
-                <div>{{ text }}</div>
-                <otro />
-            `
-        });
-        
-        app.component("otro", {
-            template: `<tercer />`
+            template: `<v-button ref="elemento" :label="text"></v-button>`
         });
 
-        app.component("tercer", {
-            inject: ["otroTexto"],
-            template: `<div>{{ otroTexto }}</div>`
+        app.component("v-button", {
+            props: ["label"],
+            template: `<button>{{ label }}</button>`
         });
 
-        const vm =  app.mount("#app");
+        const vm = app.mount("#app");
+
+        console.log(vm.$props);
     </script>
 </body>
 </html>
